@@ -1,5 +1,6 @@
 ﻿using Azure.Core;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,6 +43,13 @@ namespace SystemStores.App.Repos.Product
         {
             return AppDbContext.products.ToList();
         }
+
+        public List<Products> GetProducts(int id)
+        {
+            var prodect = AppDbContext.products.Where(i => i.Id == id);
+            return prodect.ToList();
+        }
+
         public void UpdateProduct(Domain.Models.Product.UpdateProduct _prodect, int id)
         {
             var prodect = AppDbContext.products.FirstOrDefault(i => i.Id == id);

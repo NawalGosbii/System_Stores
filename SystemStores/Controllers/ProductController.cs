@@ -15,7 +15,15 @@ namespace SystemStores.Controllers
             product = _product;
         }
         [HttpGet]
-        public List<Domain.Products> GetProducts() { return product.GetProducts(); }
+        public List<Domain.Products> GetProducts()
+        {
+            return product.GetProducts();
+        }
+        [HttpGet("{id}")]
+        public List<Domain.Products> GetProducts(int id)
+        {
+            return product.GetProducts();
+        }
         [HttpPost]
         public void add(Domain.Models.Product.AddProduct product)
         {
@@ -28,6 +36,6 @@ namespace SystemStores.Controllers
             this.product.UpdateProduct(product, id);
         }
         [HttpDelete]
-        public void DelProduct(int id) { this.product.DelProduct(id); }      
+        public void DelProduct(int id) { this.product.DelProduct(id); }
     }
 }
