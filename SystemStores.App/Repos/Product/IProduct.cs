@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SystemStores.Domain;
-
-namespace SystemStores.App.Repos.Product
+﻿namespace SystemStores.App.Repos.Product
 {
     public interface IProduct
     {
         List<Domain.Products> GetProducts();
-        List<Domain.Products> GetProducts(int id);
+        List<Domain.Products> GetProduct(int id);
+        List<Domain.Products> GetProducts(string name);
         public void AddProduct(Domain.Models.Product.AddProduct Product);
         public void UpdateProduct(Domain.Models.Product.UpdateProduct Product, int id);
         public void DelProduct(int id);

@@ -1,15 +1,5 @@
-﻿using Azure.Core;
-using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SystemStores.Domain;
-using SystemStores.Domain.Models;
+﻿using SystemStores.Domain;
 using SystemStores.infra.Data;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace SystemStores.App.Repos.Product
 {
@@ -33,6 +23,15 @@ namespace SystemStores.App.Repos.Product
             AppDbContext.products.Add(prodect);
             AppDbContext.SaveChanges();
         }
+        public void UpdateProduct(Domain.Models.Product.UpdateProduct _prodect, int id)
+        {
+            var prodect = AppDbContext.products.FirstOrDefault(i => i.Id == id);
+            prodect.Description = _prodect.Description;
+            prodect.ProductImage = _prodect.ProductImage;
+            prodect.CategoryID = _prodect.CategoryID;
+            AppDbContext.products.Update(prodect);
+            AppDbContext.SaveChanges();
+        }
         public void DelProduct(int id)
         {
             var prodect = AppDbContext.products.FirstOrDefault(i => i.Id == id);
@@ -43,21 +42,16 @@ namespace SystemStores.App.Repos.Product
         {
             return AppDbContext.products.ToList();
         }
-
-        public List<Products> GetProducts(int id)
+        public List<Products> GetProduct(int id)
         {
             var prodect = AppDbContext.products.Where(i => i.Id == id);
             return prodect.ToList();
         }
-
-        public void UpdateProduct(Domain.Models.Product.UpdateProduct _prodect, int id)
+        public List<Products> GetProducts(string name)
         {
-            var prodect = AppDbContext.products.FirstOrDefault(i => i.Id == id);
-            prodect.Description = _prodect.Description;
-            prodect.ProductImage = _prodect.ProductImage;
-            prodect.CategoryID = _prodect.CategoryID;
-            AppDbContext.products.Update(prodect);
-            AppDbContext.SaveChanges();
+            var prodect = AppDbContext.products.Where(i => i.Description == name);
+            return prodect.ToList();
         }
+        
     }
 }

@@ -15,14 +15,19 @@ namespace SystemStores.Controllers
             product = _product;
         }
         [HttpGet]
-        public List<Domain.Products> GetProducts()
+        public List<Domain.Products> AllProducts()
         {
             return product.GetProducts();
         }
-        [HttpGet("{id}")]
-        public List<Domain.Products> GetProducts(int id)
+        [HttpGet("SearchID")]
+        public List<Domain.Products> GetProduct(int id)
         {
-            return product.GetProducts();
+            return product.GetProduct(id);
+        }
+        [HttpGet("SearchName")]
+        public List<Domain.Products> GetProducts(string name)
+        {
+            return product.GetProducts(name);
         }
         [HttpPost]
         public void add(Domain.Models.Product.AddProduct product)
@@ -30,12 +35,15 @@ namespace SystemStores.Controllers
             this.product.AddProduct(product);
         }
 
-        [HttpPut]
+        [HttpPut("{id}")]
         public void Update(Domain.Models.Product.UpdateProduct product, int id)
         {
             this.product.UpdateProduct(product, id);
         }
-        [HttpDelete]
-        public void DelProduct(int id) { this.product.DelProduct(id); }
+        [HttpDelete("{id}")]
+        public void DelProduct(int id)
+        {
+            this.product.DelProduct(id);
+        }
     }
 }
