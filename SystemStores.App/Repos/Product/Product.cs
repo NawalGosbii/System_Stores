@@ -1,4 +1,6 @@
-﻿using SystemStores.Domain;
+﻿using System.Globalization;
+using System.Security.Cryptography.X509Certificates;
+using SystemStores.Domain;
 using SystemStores.infra.Data;
 
 namespace SystemStores.App.Repos.Product
@@ -49,7 +51,7 @@ namespace SystemStores.App.Repos.Product
         }
         public List<Products> GetProducts(string name)
         {
-            var prodect = AppDbContext.products.Where(i => i.Description == name);
+            var prodect = AppDbContext.products.Where(i => i.Description.Contains(name));
             return prodect.ToList();
         }
         

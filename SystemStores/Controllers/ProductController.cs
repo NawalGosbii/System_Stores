@@ -19,12 +19,12 @@ namespace SystemStores.Controllers
         {
             return product.GetProducts();
         }
-        [HttpGet("SearchID")]
+        [HttpGet("id")]
         public List<Domain.Products> GetProduct(int id)
         {
             return product.GetProduct(id);
         }
-        [HttpGet("SearchName")]
+        [HttpGet("name")]
         public List<Domain.Products> GetProducts(string name)
         {
             return product.GetProducts(name);
